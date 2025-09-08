@@ -13,7 +13,7 @@ public:
         vector<int> x(2);
         int j;
         
-
+        // FIrst i have kept 2 for Loops then to conpute J value is J=n-i SIMPLE LOGIC
         for(int i=1;i<n;i++){
              j=n-i;   
                 if(i+j==n && isNoZero(i) && isNoZero(j)){
