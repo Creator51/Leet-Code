@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    bool isNoZero(int num) {   // \U0001f448 put this first
+    bool isNoZero(int num) {  
         while (num > 0) {
             if (num % 10 == 0) return false;
             num /= 10;
