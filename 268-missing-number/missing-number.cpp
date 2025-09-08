@@ -2,7 +2,7 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        //sort(nums.begin(), nums.end());
+        // MOST OPTIMAL WAYYY
         int n=nums.size();
         int sum=(n*(n+1))/2;
         int real_sum=0;
