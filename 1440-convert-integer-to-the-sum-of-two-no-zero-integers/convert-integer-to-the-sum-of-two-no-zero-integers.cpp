@@ -11,17 +11,17 @@ public:
 
     vector<int> getNoZeroIntegers(int n) {
         vector<int> x(2);
-
+        int j;
         
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
+        for(int i=1;i<n;i++){
+             j=n-i;   
                 if(i+j==n && isNoZero(i) && isNoZero(j)){
                 x[0]=i;
                 x[1]=j;
                 return x;
                 }
-            }
+            
         }
        return x;
         
