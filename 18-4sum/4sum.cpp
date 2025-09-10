@@ -4,8 +4,7 @@ public:
         set<vector<int>> st;
         for(int i=0;i<nums.size();i++){
             for(int j=i+1;j<nums.size();j++){
-                //set<int> hashset;
-                unordered_set<long long> hashset; 
+                set<long long> hashset;
                 for(int k=j+1;k<nums.size();k++){
                     long long sum = (long long)nums[i] + nums[j] + nums[k]; // ✅ safer cast
 
