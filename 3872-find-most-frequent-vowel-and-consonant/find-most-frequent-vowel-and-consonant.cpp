@@ -3,26 +3,18 @@ public:
     int maxFreqSum(string s) {
         unordered_map<char, int> mp;
         unordered_map<char,int> mp1;
+        int max_vovels=0,max_consonants=0;
         for(int i = 0; i < s.size(); i++) {
-            if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u')
+            if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u'){
             mp[s[i]]++;
-            else
-            mp1[s[i]]++;              
+            max_vovels=max(max_vovels,mp[s[i]]);
+            }
+            else{
+            mp1[s[i]]++;
+            max_consonants=max(max_consonants,mp1[s[i]]);
+            }              
         }
-        int maxV = 0;
-        for (auto &it : mp) {
-            maxV = max(maxV, it.second);
-        }
+        return max_vovels + max_consonants;
 
-        
-        int maxC = 0;
-        for (auto &it : mp1) {
-            maxC = max(maxC, it.second);
-        }
-
-        return maxV + maxC;
-        
-
-        return 0;
     }
 };
