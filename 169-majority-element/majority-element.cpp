@@ -1,10 +1,11 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        unordered_map<int,int> mpp;
+        map<int,int> mpp;
         for(int i=0;i<nums.size();i++){
             mpp[nums[i]]++;
         }
+        // auto it Is used to Iterate to the Map
         for(auto it:mpp){
             if(it.second > nums.size()/2)
             return it.first;
