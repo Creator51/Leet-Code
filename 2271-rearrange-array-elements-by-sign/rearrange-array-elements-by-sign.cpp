@@ -5,6 +5,7 @@ public:
         int positive=0;
         int negative=1;
         //Just Focus On Indexing 
+        //Even for Positive Index and Odd For Negative Index
         for(int i=0;i<nums.size();i++){
             if(nums[i]<0){
                 ans[negative]=nums[i];
