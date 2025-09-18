@@ -4,6 +4,7 @@ public:
         vector<int> ans(nums.size(),0);
         int positive=0;
         int negative=1;
+        //Just Focus On Indexing 
         for(int i=0;i<nums.size();i++){
             if(nums[i]<0){
                 ans[negative]=nums[i];
