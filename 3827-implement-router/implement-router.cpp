@@ -1,59 +1,72 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class Router {
 public:
-    Router(int memoryLimit) : memoryLimit(memoryLimit) {}
-
+    int MAX_SIZE;
+    queue<string> que;
+    unordered_map<int,vector<int>> destTimeMap;// D->{T1,T2,T3}
+    unordered_map<string,vector<int>> packetStore; // S->{S,D,I}
+    Router(int memoryLimit) {
+        MAX_SIZE=memoryLimit;
+        
+    }
+    string makekey(int s,int d,int t){
+        return to_string(s)+'_'+to_string(d)+'_'+to_string(t);
+    }
+    
     bool addPacket(int source, int destination, int timestamp) {
-        tuple<int,int,int> key = {source, destination, timestamp};
-        if (seen.count(key)) return false;
+        string key = makekey(source,destination,timestamp);
 
-        if ((int)q.size() == memoryLimit) {
-            forwardPacket(); // evict oldest if full
+        if(packetStore.find(key)!=packetStore.end()){
+            return false;
         }
-
-        q.push(key);
-        seen.insert(key);
-        dest2timestamps[destination].push_back(timestamp);
+        if(que.size()>=MAX_SIZE){
+            forwardPacket();
+        }
+        packetStore[key]={source,destination,timestamp};
+        que.push(key);
+        destTimeMap[destination].push_back(timestamp);
         return true;
+        
     }
-
+    
     vector<int> forwardPacket() {
-        if (q.empty()) return {};
-
-        auto [src, dst, ts] = q.front();
-        q.pop();
-        seen.erase({src, dst, ts});
-        dest2forwardedCount[dst]++;
-
-        return {src, dst, ts};
-    }
-
-    int getCount(int destination, int startTime, int endTime) {
-        if (!dest2timestamps.count(destination)) return 0;
-
-        const auto& arr = dest2timestamps[destination];
-        int startIndex = dest2forwardedCount[destination];
-
-        if (startIndex >= (int)arr.size()) return 0;
-
-        auto lo = lower_bound(arr.begin() + startIndex, arr.end(), startTime);
-        auto hi = upper_bound(arr.begin() + startIndex, arr.end(), endTime);
-        return hi - lo;
-    }
-
-private:
-    int memoryLimit;
-    queue<tuple<int,int,int>> q;   // FIFO packets
-    unordered_set<tuple<int,int,int>, 
-        function<size_t(const tuple<int,int,int>&)>> seen{
-        0, [](const tuple<int,int,int>& t){
-            auto [a,b,c] = t;
-            return ((a*1315423911u + b*2654435761u) ^ c);
+        if(packetStore.empty()){
+            return {};
         }
-    };
+        //Removing it from queue
+        string key = que.front();
+        que.pop();
 
-    unordered_map<int, vector<int>> dest2timestamps;   // dest -> timestamps
-    unordered_map<int, int> dest2forwardedCount;       // dest -> count of forwarded
+        vector<int> packet= packetStore[key];
+        packetStore.erase(key);
+
+        int D=packet[1];
+        // Now we need to Erase from Destination Also
+        destTimeMap[D].erase(destTimeMap[D].begin());
+
+        return packet;
+        
+    }
+    
+    int getCount(int destination, int startTime, int endTime) {
+
+        auto it = destTimeMap.find(destination);
+        if(it == destTimeMap.end() || it->second.empty()){
+            return 0;
+        }
+
+       
+        int i=lower_bound(begin(it->second),end(it->second),startTime) - begin(it->second);
+        int j=upper_bound(begin(it->second),end(it->second),endTime) - begin(it->second);
+
+        return j-i;
+        
+    }
 };
+
+/**
+ * Your Router object will be instantiated and called as such:
+ * Router* obj = new Router(memoryLimit);
+ * bool param_1 = obj->addPacket(source,destination,timestamp);
+ * vector<int> param_2 = obj->forwardPacket();
+ * int param_3 = obj->getCount(destination,startTime,endTime);
+ */
