@@ -8,7 +8,7 @@ public:
 
         while (top <= bottom && left <= right) {
             // Right
-            for (int i = left; i <= right; i++) {
+            for (int i = top; i <= right; i++) {
                 ans[top][i] = num++;
             }
             top++;
