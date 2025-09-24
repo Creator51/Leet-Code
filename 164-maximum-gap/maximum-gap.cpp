@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maximumGap(vector<int>& nums) {
-        if(nums.size()==0 || nums.size()==1){
+        if(nums.size() < 2){
             return 0;
         }
         sort(nums.begin(),nums.end());
