@@ -4,10 +4,7 @@ class Solution:
         hash2={}
 
         for i in s:
-            if i in hash1:
-                hash1[i]+=1
-            else:
-                hash1[i]=1
+            hash1[i]=hash1.get(i,0)+1
 
         for i in t:
             if i in hash2:
