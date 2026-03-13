@@ -1,26 +1,19 @@
 class Solution:
     def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
-
-        def check(s, t):
-            map_s = {}
-            map_t = {}
-
-            for a, b in zip(s, t):
-
-                if a not in map_s:
-                    map_s[a] = b
-
-                if b not in map_t:
-                    map_t[b] = a
-
-                if map_s[a] != b or map_t[b] != a:
+        def check(s,t):
+            hash={}
+            for i,j in zip(s,t):
+                if i in hash:
+                    if hash[i]!=j:
+                        return False
+                elif j in hash.values():
                     return False
-
+                hash[i]=j
             return True
 
-        result = []
-        for w in words:
-            if check(w, pattern):
-                result.append(w)
-
+        result=[]
+        for i in words:
+            if check(i,pattern):
+                result.append(i)
         return result
+        
