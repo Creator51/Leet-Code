@@ -5,7 +5,7 @@ class Solution:
             return 1
 
         
-        for i in range(1,len(s)):
+        for i in range(len(s)):
             #odd palindorme
             low = i
             high =i
@@ -27,5 +27,5 @@ class Solution:
                 if low == -1 or high == len(s):
                     break
 
-        return ans+1
+        return ans
         
