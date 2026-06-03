@@ -1,23 +1,17 @@
 class Solution:
-    def earliestFinishTime(self, landStartTime: List[int], landDuration: List[int], waterStartTime: List[int], waterDuration: List[int]) -> int:
+    def earliestFinishTime(self, startL: List[int], durL: List[int], startW: List[int], durW: List[int]) -> int:
+        minL, minW, res = 3000, 3000, 3000
+        n = len(startL)
+        m = len(startW)
 
-        n= len(landStartTime)
-        m=len(waterStartTime)
-        ans=float('inf')
+
         for i in range(n):
-            for j in range(m):
+            minL=min(minL , startL[i]+durL[i])
 
-                land = landStartTime[i] + landDuration[i]
-                water = waterStartTime[j] + waterDuration[j]
-                
-                case1 = land + max(0,waterStartTime[j]-land) + waterDuration[j]
-                case2= water + max(0,landStartTime[i]-water) + landDuration[i]
+        for j in range(m):
+            minW=min(minW,startW[j]+durW[j])
+            res=min(res,max(minL,startW[j])+durW[j])
 
-                ans=min(ans,case1,case2)
-
-
-        return ans
-
-
-
-           
+        for i in range(n):
+            res=min(res,max(minW,startL[i])+durL[i])
+        return res
