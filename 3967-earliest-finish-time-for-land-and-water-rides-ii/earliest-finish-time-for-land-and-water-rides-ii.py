@@ -1,0 +1,19 @@
+class Solution:
+    def earliestFinishTime(self, startL: List[int], durL: List[int], startW: List[int], durW: List[int]) -> int:
+        minL, minW, res = 300005, 300005, 300005
+        n = len(startL)
+        m = len(startW)
+
+
+        for i in range(n):
+            minL=min(minL , startL[i]+durL[i])
+
+        for j in range(m):
+            minW=min(minW,startW[j]+durW[j])
+            res=min(res,max(minL,startW[j])+durW[j])
+
+        for i in range(n):
+            res=min(res,max(minW,startL[i])+durL[i])
+        return res
+
+        
