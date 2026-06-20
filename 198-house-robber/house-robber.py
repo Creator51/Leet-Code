@@ -1,5 +1,8 @@
 class Solution:
     def answer(self,index,nums,dp):
+
+        #This is the Dp - Meorization
+
         if index == 0:
             return nums[index]
 
