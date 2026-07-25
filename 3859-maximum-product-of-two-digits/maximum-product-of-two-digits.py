@@ -1,13 +1,16 @@
 class Solution:
     def maxProduct(self, n: int) -> int:
-        max1 = max2 = 0
+        ans=[]
+
+        if len(str(n))<2:
+            return n
+
+        while n:
+            temp=n%10
+            ans.append(temp)
+            n=n//10
+
+        ans.sort()
+
+        return ans[-1]*ans[-2]        
         
-        for d in str(n):
-            d = int(d)
-            if d > max1:
-                max2 = max1
-                max1 = d
-            elif d > max2:
-                max2 = d
-        
-        return max1 * max2
