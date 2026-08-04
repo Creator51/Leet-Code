@@ -23,6 +23,6 @@ class Solution:
 
             return max(left,right)+1
 
-        return True if helper(root)!=-1 else False
+        return helper(root)!=-1
 
         
