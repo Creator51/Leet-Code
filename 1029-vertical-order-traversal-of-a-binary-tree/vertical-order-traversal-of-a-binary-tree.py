@@ -23,9 +23,6 @@ class Solution:
         ans=[]
         vals=mp.values()
 
-        # for i in mp:
-        #     print([i],mp[i])
-
         for verticals in sorted(mp.keys()):
             
             col=[]
