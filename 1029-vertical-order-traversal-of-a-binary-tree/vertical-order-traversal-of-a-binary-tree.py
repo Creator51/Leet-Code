@@ -14,10 +14,10 @@ class Solution:
         while q:
             node,vertical,level=q.popleft()
             mp[vertical][level].append(node.val)
-            if node and node.left:
+            if node.left:
                 q.append((node.left,vertical-1,level+1))
 
-            if node and node.right:
+            if node.right:
                 q.append((node.right,vertical+1,level+1))
 
         ans=[]
