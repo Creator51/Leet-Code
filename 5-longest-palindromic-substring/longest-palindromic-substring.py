@@ -1,41 +1,50 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if len(s) < 2:
+        if len(s)<2:
             return s
-        ans= ""
-        for i in range(1,len(s)):
-            #odd case
-            low = i
-            high =i
-            while low >=0 and high<len(s) and  s[low] == s[high]:
-                low -=1
-                high+=1
 
-                if low == -1 or high == len(s):
-                    break
+        ans=""
+        l_ans=0
 
-            str1=s[low+1:high]
+        for i in range(len(s)):
+            l=r=i
 
-            #Even palindrome
-            low = i-1
-            high = i
-            while low >=0 and high<len(s) and  s[low] == s[high]:
-                low -= 1
-                high += 1
+            #for odd
 
-                if low == -1 or high == len(s):
-                    break
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                l-=1
+                r +=1
+
+                
+            s1=s[l+1:r]
+
+            #for even
+
+            l,r=i,i+1
+
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                l-=1
+                r+=1
+
+                
+
+            s2=s[l+1:r]
             
-            str2=s[low+1:high]
+            #print(ans)
+            #print(f"s1 is {s1} ,s2 is {s2}")
+            if len(s1) > len(ans):
+                ans=s1
+            if len(s2)>len(ans):
+                ans=s2
 
-            if len(str1) > len(ans):
-                ans = str1
-            if len(str2) > len(ans):
-                ans = str2
-
+            #print(f"answer is {ans}")
+            # if len(s1)>=len(s2) and len(s1)>=l_ans:
+            #     ans+=s1
+            #     l_ans=len(s)
+            # else:
+            #     ans+=s2
+            #     l_ans=len(s)
         return ans
+            
 
-
-
-        
-        
+                  
