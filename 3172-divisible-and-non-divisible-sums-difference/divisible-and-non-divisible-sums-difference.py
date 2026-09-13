@@ -1,14 +1,14 @@
 class Solution:
     def differenceOfSums(self, n: int, m: int) -> int:
-        not_div=[]
-        div=[]
+        not_div=0
+        div=0
         for i in range(1,n+1):
 
             if i%m==0:
-                div.append(i)
+                div+=i
             else:
-                not_div.append(i)
-        print(not_div)
-        return sum(not_div)-sum(div)
+                not_div+=i
+        
+        return (not_div)-(div)
 
         
