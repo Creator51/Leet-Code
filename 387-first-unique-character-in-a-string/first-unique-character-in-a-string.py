@@ -1,16 +1,22 @@
-from collections import Counter
 class Solution:
     def firstUniqChar(self, s: str) -> int:
+        ind=-1
 
-        dict={}
+        dictt={}
 
-        for i in s:
-            dict[i]=dict.get(i,0)+1
+        for i in range(len(s)):
+            dictt[s[i]]=dictt.get(s[i],0)+1
+        unq=False
+        for i in dictt.keys():
+            if dictt[i]==1:
+                unq=i
+                break
 
-        for i,ch in enumerate(s):
-            if dict[ch]==1:
-                return i
-
-        return -1
-
+        if unq:
+            for i in range(len(s)):
+                if s[i]==unq:
+                    ind=i
+                    break
+        
+        return ind
         
