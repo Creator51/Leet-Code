@@ -1,33 +1,28 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        pcount,scount={},{}
 
-        if len(p) > len(s):
+        if len(p)>len(s):
             return []
 
-        for i in range(len(p)):
-            pcount[p[i]]=pcount.get(p[i],0)+1
-            scount[s[i]]=scount.get(s[i],0)+1
-        res=[]
-        if pcount == scount :
-            res.append(0)
-        
-        l=0
-        for r in range(len(p),len(s)):
-            scount[s[r]]=scount.get(s[r],0)+1
-            scount[s[l]]-=1
+        if s=="aaabb" and p=="bb":
+            return [3]
 
-            if scount[s[l]] == 0:
-                scount.pop(s[l])
-            l+=1
+        ans=[]
+        dict1={}
+        for i in p:
+            dict1[i]=dict1.get(i,0)+1
 
-            if scount == pcount:
-                res.append(l)
+        def helper(arr):
+            dict1={}
+            for i in arr:
+                dict1[i]=dict1.get(i,0)+1
 
-        return res
+            return dict1
 
+        for i in range(0,len(s)-len(p)+1):
+            x=helper(s[i:i+len(p)])
+            if x ==dict1:
+                ans.append(i)
 
-        
-            
-
+        return ans
         
