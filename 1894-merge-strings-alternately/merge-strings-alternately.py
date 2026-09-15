@@ -11,9 +11,9 @@ class Solution:
             rem=word1[length:]
         
 
-        for i,j in enumerate(range(length)):
+        for i in range(length):
             ans+=word1[i]
-            ans+=word2[j]
+            ans+=word2[i]
 
         return ans+rem
 
